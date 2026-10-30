@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+/* CashewTrace brand tokens — use as bg-brand, text-accent, bg-cream, text-ink, etc. */
+@theme inline {
+  --color-brand: #1f5130;
+  --color-brand-dark: #163b23;
+  --color-brand-light: #e6efe8;
+  --color-accent: #e8742c;
+  /* Darker cashew-apple orange: white text on it, or it as text on cream/white, passes WCAG AA (≥4.5:1). */
+  --color-accent-dark: #b4521a;
+  --color-accent-darker: #9e4512;
+  --color-cream: #faf7f2;
+  --color-ink: #1e1e1e;
+  --font-sans: var(--font-inter);
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+}
+
+@media print {
+  @page {
+    margin: 14mm;
+  }
+  body {
+    background: white;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+/* Visible keyboard focus on every interactive element. Two-tone (white inner ring + dark orange outline)
+   so it reads on cream, white and the dark green hero alike. Inputs use their own focus ring. */
+:where(a, button, summary, select, [tabindex]):focus-visible {
+  outline: 3px solid var(--color-accent-dark);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+/* Phones: the hub's bottom tab bar is fixed, so keep scrolled-to / focused fields clear of it. */
+@media (max-width: 767px) {
+  html {
+    scroll-padding-bottom: 6rem;
+  }
+}

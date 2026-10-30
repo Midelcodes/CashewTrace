@@ -1,0 +1,220 @@
+// CashewTrace data model.
+// Conventions: money is Decimal(14,2) in naira (₦) everywhere; weights in kg; percentages as 0–100.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  AGENT
+  ADMIN
+}
+
+enum Gender {
+  FEMALE
+  MALE
+}
+
+enum AgeGroup {
+  YOUTH_18_35
+  ADULT_36_PLUS
+}
+
+enum LotStatus {
+  RECEIVED
+  DRYING
+  TESTED
+  LISTED
+  RESERVED
+  SOLD
+  REJECTED
+}
+
+enum Grade {
+  A
+  B
+  C
+  FAIL
+}
+
+enum DryingMethod {
+  SOLAR_PLATFORM
+  SOLAR_DRYER
+  TARPAULIN
+}
+
+model Hub {
+  id        String   @id @default(cuid())
+  name      String
+  code      String   @unique // e.g. KOG-DEK: state code + hub code
+  lga       String
+  state     String
+  createdAt DateTime @default(now())
+
+  agents  Agent[]
+  farmers Farmer[]
+  lots    Lot[]
+}
+
+model Agent {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String   @unique
+  pinHash   String
+  role      Role     @default(AGENT)
+  gender    Gender
+  isYouth   Boolean  @default(false) // under 35
+  active    Boolean  @default(true) // deactivated agents cannot sign in; history is kept
+  hubId     String
+  createdAt DateTime @default(now())
+
+  hub       Hub           @relation(fields: [hubId], references: [id])
+  lots      Lot[]
+  tests     QualityTest[]
+  auditLogs AuditLog[]
+
+  @@index([hubId])
+}
+
+model Farmer {
+  id            String   @id @default(cuid())
+  farmerCode    String   @unique // CTF-000123
+  fullName      String
+  phone         String
+  gender        Gender
+  ageGroup      AgeGroup
+  community     String
+  lga           String
+  state         String
+  farmSizeHa    Decimal  @db.Decimal(6, 2)
+  numberOfTrees Int?
+  cooperative   String?
+  consentGiven  Boolean // must be true; enforced in the registration form (zod)
+  hubId         String
+  createdAt     DateTime @default(now())
+
+  hub  Hub   @relation(fields: [hubId], references: [id])
+  lots Lot[]
+
+  @@index([hubId])
+}
+
+model Lot {
+  id           String    @id @default(cuid())
+  lotCode      String    @unique // CT-KOG-2026-000123: prefix + state code + season + sequence
+  farmerId     String
+  hubId        String
+  agentId      String
+  season       Int // harvest season year
+  harvestMonth Int // 1–12
+  bags         Int // 80 kg bags
+  weightKg     Decimal   @db.Decimal(10, 2)
+  status       LotStatus @default(RECEIVED)
+  receivedAt   DateTime  @default(now())
+
+  // Workflow fields filled as the lot moves through the hub.
+  moistureBefore  Decimal?  @db.Decimal(5, 2) // %, recorded when solar drying starts
+  dryingStartedAt DateTime?
+  rejectionReason String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  farmer         Farmer          @relation(fields: [farmerId], references: [id])
+  hub            Hub             @relation(fields: [hubId], references: [id])
+  agent          Agent           @relation(fields: [agentId], references: [id])
+  qualityTest    QualityTest?
+  buyerInterests BuyerInterest[]
+  sale           Sale?
+
+  @@index([farmerId])
+  @@index([hubId])
+  @@index([status])
+  @@index([season])
+}
+
+model QualityTest {
+  id             String       @id @default(cuid())
+  lotId          String       @unique // one test per lot
+  moistureBefore Decimal      @db.Decimal(5, 2) // %
+  moistureAfter  Decimal      @db.Decimal(5, 2) // %
+  korLbs         Decimal      @db.Decimal(5, 2) // lbs kernel per 80 kg bag
+  nutCountPerKg  Int?
+  defectivePct   Decimal?     @db.Decimal(5, 2)
+  grade          Grade
+  dryingDays     Int
+  dryingMethod   DryingMethod @default(SOLAR_PLATFORM)
+  testedById     String
+  testedAt       DateTime     @default(now())
+
+  lot      Lot   @relation(fields: [lotId], references: [id], onDelete: Cascade)
+  testedBy Agent @relation(fields: [testedById], references: [id])
+
+  @@index([grade])
+}
+
+// Submitted from the public verification page; buyers do not have accounts.
+model BuyerInterest {
+  id          String    @id @default(cuid())
+  lotId       String
+  companyName String
+  contactName String
+  email       String
+  phone       String
+  message     String
+  contactedAt DateTime? // set by a hub agent via "Mark contacted"
+  createdAt   DateTime  @default(now())
+
+  lot Lot @relation(fields: [lotId], references: [id], onDelete: Cascade)
+
+  @@index([lotId])
+}
+
+model Sale {
+  id               String   @id @default(cuid())
+  lotId            String   @unique
+  buyerName        String
+  pricePerTonneNgn Decimal  @db.Decimal(14, 2)
+  totalValueNgn    Decimal  @db.Decimal(14, 2)
+  commissionNgn    Decimal  @db.Decimal(14, 2) // paid by the buyer, on top of totalValue
+  farmerFeesNgn    Decimal  @db.Decimal(14, 2)
+  farmerPayoutNgn  Decimal  @db.Decimal(14, 2)
+  soldAt           DateTime @default(now())
+
+  lot Lot @relation(fields: [lotId], references: [id])
+}
+
+// Single-row table (id = 1), editable by an admin. Defaults live in lib/settings.ts.
+model Settings {
+  id                          Int      @id @default(1)
+  farmGatePricePerTonneNgn    Decimal  @db.Decimal(14, 2)
+  commissionRate              Decimal  @default(0.02) @db.Decimal(5, 4) // 0.02 = 2%
+  dryingTestFeePerBagNgn      Decimal  @db.Decimal(14, 2)
+  storageFeePerBagPerMonthNgn Decimal  @db.Decimal(14, 2)
+  moistureMaxPct              Decimal  @default(10) @db.Decimal(5, 2)
+  gradeA_minKor               Decimal  @default(48) @db.Decimal(5, 2)
+  gradeB_minKor               Decimal  @default(45) @db.Decimal(5, 2)
+  gradeC_minKor               Decimal  @default(42) @db.Decimal(5, 2)
+  // Share of solar-dried tonnage assumed saved from spoilage — an estimate for the impact dashboard.
+  spoilageAvoidedFactor       Decimal  @default(0.05) @db.Decimal(5, 4)
+  updatedAt                   DateTime @updatedAt
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  agentId   String
+  action    String // Farmer: CREATE · Lot: RECEIVED | DRYING_STARTED | MOISTURE_CHECK | TESTED | LISTED | RESERVED | SOLD | REJECTED
+  entity    String // Farmer | Lot
+  entityId  String
+  detail    String? // human-readable summary shown on the lot timeline
+  createdAt DateTime @default(now())
+
+  agent Agent @relation(fields: [agentId], references: [id])
+
+  @@index([entity, entityId])
+}
