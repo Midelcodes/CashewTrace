@@ -131,7 +131,7 @@ export function GradeChart({ data }: { data: ChartData["grades"] }) {
       title="Grade distribution"
       empty={total === 0}
       subtitle={`${total} tested lots`}
-      table={{ head: ["Grade", "Lots", "Share"], rows: rows.map((r) => [r.label, r.lots, total ? `${Math.round((r.lots / total) * 100)}%` : "—"]) }}
+      table={{ head: ["Grade", "Lots", "Share"], rows: rows.map((r) => [r.label, r.lots, total ? `${Math.round((r.lots / total) * 100)}%` : "n/a"]) }}
     >
       <ResponsiveContainer width="100%" height={180}>
         <BarChart data={rows} layout="vertical" margin={{ top: 0, right: 64, left: 4, bottom: 0 }} barCategoryGap={8}>

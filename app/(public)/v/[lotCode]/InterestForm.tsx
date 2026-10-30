@@ -47,7 +47,7 @@ export function InterestForm({ lotCode, hubName, commissionPct }: { lotCode: str
           <input name="phone" type="tel" inputMode="tel" autoComplete="tel" defaultValue={v.phone} aria-invalid={!!err.phone} className={inputClass} />
         </Field>
       </div>
-      <Field label="Message" error={err.message} hint="Optional — volume, delivery location, questions">
+      <Field label="Message" error={err.message} hint="Optional: volume, delivery location, questions">
         <textarea
           name="message"
           rows={3}

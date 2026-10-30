@@ -35,7 +35,7 @@ export function SettingsForm({ defaults }: { defaults: Defaults }) {
       )}
 
       <Group title="Prices & fees" note="The price prefills new sales; fees apply to new sales.">
-        {num("farmGatePricePerTonneNgn", "Farm-gate price", { unit: "₦ per tonne", step: "1000", hint: "Placeholder — update to the current market price" })}
+        {num("farmGatePricePerTonneNgn", "Farm-gate price", { unit: "₦ per tonne", step: "1000", hint: "Placeholder: update to the current market price" })}
         {num("commissionPct", "Buyer commission", { unit: "%", step: "0.1", hint: "Charged to buyers on completed sales" })}
         {num("dryingTestFeePerBagNgn", "Drying & testing fee", { unit: "₦ per bag", step: "50" })}
         {num("storageFeePerBagPerMonthNgn", "Storage fee", { unit: "₦ per bag per month", step: "50" })}

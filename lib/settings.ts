@@ -3,7 +3,7 @@ import { toNumber } from "@/lib/money";
 
 // Seeded defaults for the single Settings row (id = 1). Admins edit the row; these only fill an empty DB.
 export const SETTING_DEFAULTS = {
-  farmGatePricePerTonneNgn: 1_900_000, // placeholder — update to current market price in Settings
+  farmGatePricePerTonneNgn: 1_900_000, // placeholder - update to current market price in Settings
   commissionRate: 0.02, // 2%, paid by the buyer
   dryingTestFeePerBagNgn: 500,
   storageFeePerBagPerMonthNgn: 200,

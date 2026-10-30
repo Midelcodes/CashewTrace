@@ -62,7 +62,7 @@ export function NewLotForm({ farmerId, today }: { farmerId: string; today: { yea
           {offStandard ? "⚠ " : ""}
           {perBag.toFixed(1)} kg per bag
           {offStandard
-            ? ` — far from the standard ${STANDARD_BAG_KG} kg bag. Check the bag count and the scale reading.`
+            ? `, far from the standard ${STANDARD_BAG_KG} kg bag. Check the bag count and the scale reading.`
             : ` · standard bag is ${STANDARD_BAG_KG} kg`}
         </p>
       )}

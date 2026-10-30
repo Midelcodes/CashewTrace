@@ -15,7 +15,7 @@ export function Avatar({ name, size = "md" }: { name: string; size?: "md" | "lg"
   );
 }
 
-// A green, B teal, C amber, FAIL red — validated as a CVD-safe set (dataviz palette check).
+// A green, B teal, C amber, FAIL red - validated as a CVD-safe set (dataviz palette check).
 // B and C carry dark text so small badge text keeps contrast.
 export const GRADE_HEX: Record<Grade, string> = { A: "#15803d", B: "#0891b2", C: "#ca8a04", FAIL: "#dc2626" };
 export const GRADE_STYLE: Record<Grade, string> = {

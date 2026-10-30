@@ -194,8 +194,8 @@ export default async function LotPage({
           <dl className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm sm:grid-cols-3">
             <Detail label="Moisture" value={`${toNumber(test.moistureBefore)}% → ${toNumber(test.moistureAfter)}%`} />
             <Detail label="KOR" value={`${toNumber(test.korLbs).toFixed(1)} lbs / 80 kg`} />
-            <Detail label="Nut count" value={test.nutCountPerKg ? `${test.nutCountPerKg} / kg` : "—"} />
-            <Detail label="Defective" value={test.defectivePct !== null ? `${toNumber(test.defectivePct)}%` : "—"} />
+            <Detail label="Nut count" value={test.nutCountPerKg ? `${test.nutCountPerKg} / kg` : "n/a"} />
+            <Detail label="Defective" value={test.defectivePct !== null ? `${toNumber(test.defectivePct)}%` : "n/a"} />
             <Detail label="Drying" value={`${test.dryingDays} days · solar platform`} />
             <Detail label="Tested" value={`${formatDateTime(test.testedAt)} · ${test.testedBy.name}`} />
           </dl>

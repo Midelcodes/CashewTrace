@@ -3,7 +3,7 @@ import { GenderAgeChart, GradeChart, KorHistogram, TonnesByMonthChart } from "@/
 import { INCLUSION_TARGET_PCT, type ImpactData } from "@/lib/impact";
 import { formatNaira, formatNairaCompact, formatTonnes } from "@/lib/money";
 
-const fmtPct = (n: number | null) => (n === null ? "—" : `${Math.round(n)}%`);
+const fmtPct = (n: number | null) => (n === null ? "n/a" : `${Math.round(n)}%`);
 
 /** KPI tiles + charts. Aggregates only, so the same view serves the hub and the public /impact page. */
 export function ImpactView({ data, periodLabel }: { data: ImpactData; periodLabel: string }) {
@@ -25,12 +25,12 @@ export function ImpactView({ data, periodLabel }: { data: ImpactData; periodLabe
       </Group>
 
       <Group title="Quality" note={`${quality.tested} tested lots`}>
-        <Tile label="Average KOR" value={quality.avgKor === null ? "—" : quality.avgKor.toFixed(1)} sub="lbs per 80 kg bag" />
+        <Tile label="Average KOR" value={quality.avgKor === null ? "n/a" : quality.avgKor.toFixed(1)} sub="lbs per 80 kg bag" />
         <Tile label="Grade A or B" value={fmtPct(quality.abPct)} sub="of tested lots" />
         <Tile label="Rejection rate" value={fmtPct(quality.rejectionPct)} sub={`${quality.rejected} of ${volume.lots} lots received`} />
         <Tile
           label="Moisture reduction"
-          value={quality.moistureDrop === null ? "—" : `−${quality.moistureDrop.toFixed(1)} pts`}
+          value={quality.moistureDrop === null ? "n/a" : `−${quality.moistureDrop.toFixed(1)} pts`}
           sub="average, before → after solar drying"
         />
       </Group>
@@ -40,7 +40,7 @@ export function ImpactView({ data, periodLabel }: { data: ImpactData; periodLabe
         <Tile label="Paid to farmers" value={formatNairaCompact(money.paidNgn)} sub={`${formatNaira(money.paidNgn)} after fees`} />
         <Tile
           label="Average payout per farmer"
-          value={money.avgPayoutNgn === null ? "—" : formatNairaCompact(money.avgPayoutNgn)}
+          value={money.avgPayoutNgn === null ? "n/a" : formatNairaCompact(money.avgPayoutNgn)}
           sub={money.avgPayoutNgn === null ? "No sales yet" : `${formatNaira(money.avgPayoutNgn)} · ${money.farmersPaid} farmers paid`}
         />
       </Group>
@@ -58,7 +58,7 @@ export function ImpactView({ data, periodLabel }: { data: ImpactData; periodLabe
             <p className="mt-1">
               Tonnes solar-dried ({formatTonnes(volume.kgDried)}) × spoilage-avoided factor (
               {Math.round(environment.spoilageFactor * 1000) / 10}%) = {formatTonnes(environment.lossAvoidedKg)}. The factor
-              is an assumption set by an admin in Settings, to be calibrated with field data — it is not a measurement.
+              is an assumption set by an admin in Settings, to be calibrated with field data. It is not a measurement.
             </p>
           </details>
         </Tile>
@@ -123,7 +123,7 @@ function InclusionTile({ value }: { value: number | null }) {
     return (
       <div className="flex flex-col rounded-2xl bg-white p-4 ring-1 ring-black/5">
         <p className="text-xs text-ink/70">Women or youth</p>
-        <p className="mt-1 text-2xl font-bold text-ink">—</p>
+        <p className="mt-1 text-2xl font-bold text-ink">n/a</p>
         <p className="mt-0.5 text-xs text-ink/70">No farmers registered yet · target {INCLUSION_TARGET_PCT}%</p>
       </div>
     );

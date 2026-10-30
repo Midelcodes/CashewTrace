@@ -160,7 +160,7 @@ export default async function HubDashboardPage({ searchParams }: { searchParams:
                           ? "bg-brand-light text-brand hover:bg-brand-light/70"
                           : "bg-accent-dark text-white hover:bg-accent-darker"
                       }`}
-                      title={b.contactedAt ? `Contacted ${formatDateTime(b.contactedAt)} — tap to undo` : "Mark as contacted"}
+                      title={b.contactedAt ? `Contacted ${formatDateTime(b.contactedAt)}. Tap to undo.` : "Mark as contacted"}
                     >
                       {b.contactedAt ? "✓ Contacted" : "Mark contacted"}
                     </button>

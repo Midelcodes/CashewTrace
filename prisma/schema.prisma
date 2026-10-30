@@ -200,7 +200,7 @@ model Settings {
   gradeA_minKor               Decimal  @default(48) @db.Decimal(5, 2)
   gradeB_minKor               Decimal  @default(45) @db.Decimal(5, 2)
   gradeC_minKor               Decimal  @default(42) @db.Decimal(5, 2)
-  // Share of solar-dried tonnage assumed saved from spoilage — an estimate for the impact dashboard.
+  // Share of solar-dried tonnage assumed saved from spoilage - an estimate for the impact dashboard.
   spoilageAvoidedFactor       Decimal  @default(0.05) @db.Decimal(5, 4)
   updatedAt                   DateTime @updatedAt
 }

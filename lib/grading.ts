@@ -1,9 +1,9 @@
-// Pure grading logic — no DB access, so it can be unit-tested and reused by the seed.
+// Pure grading logic - no DB access, so it can be unit-tested and reused by the seed.
 
 export type Grade = "A" | "B" | "C" | "FAIL";
 
 // Thresholds are configurable defaults, to be calibrated with buyers.
-// They always come from the Settings row — never hard-code them at call sites.
+// They always come from the Settings row - never hard-code them at call sites.
 export type GradingThresholds = {
   moistureMaxPct: number;
   gradeA_minKor: number;

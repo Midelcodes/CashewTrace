@@ -108,11 +108,11 @@ export const getPublicLot = cache(async (rawCode: string): Promise<PublicLot | n
     testedBy: firstName(t.testedBy.name),
   };
 
-  // Public wording per event — audit `detail` is never exposed (it holds buyer names and prices).
+  // Public wording per event - audit `detail` is never exposed (it holds buyer names and prices).
   const describe: Record<string, () => string> = {
     RECEIVED: () => `${lot.bags} bags received at ${lot.hub.name}`,
     DRYING_STARTED: () => "Solar drying started",
-    MOISTURE_CHECK: () => "Moisture re-checked — dried for longer",
+    MOISTURE_CHECK: () => "Moisture re-checked, dried for longer",
     TESTED: () => (test ? `Moisture and KOR tested · ${test.grade === "FAIL" ? "below minimum grade" : `Grade ${test.grade}`}` : "Quality tested"),
     LISTED: () => "Listed for buyers",
     RESERVED: () => "Reserved for a buyer",
@@ -210,7 +210,7 @@ export async function getListedLots(f: CatalogueFilters): Promise<CatalogueLot[]
   }));
 }
 
-/** Everything currently available, plus filter options — independent of the active filters. */
+/** Everything currently available, plus filter options - independent of the active filters. */
 export async function getCatalogueSummary() {
   const lots = await db.lot.findMany({
     where: AVAILABLE,

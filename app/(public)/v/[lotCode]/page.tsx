@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
-    robots: { index: false }, // demo data — keep out of search results
+    robots: { index: false }, // demo data - keep out of search results
     openGraph: {
       title,
       description,
@@ -47,10 +47,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const STATUS_INFO: Record<LotStatus, { label: string; text: string; tone: string }> = {
-  LISTED: { label: "Available", text: "Open to buyer offers — use the form below.", tone: "bg-green-700 text-white" },
+  LISTED: { label: "Available", text: "Open to buyer offers. Use the form below.", tone: "bg-green-700 text-white" },
   RESERVED: { label: "Reserved", text: "Held for a buyer. Similar lots may be available from this hub.", tone: "bg-accent-dark text-white" },
   SOLD: { label: "Sold", text: "This lot has been sold.", tone: "bg-ink text-cream" },
-  TESTED: { label: "Graded", text: "Quality tested — not yet listed for sale.", tone: "bg-cyan-600 text-ink" },
+  TESTED: { label: "Graded", text: "Quality tested, not yet listed for sale.", tone: "bg-cyan-600 text-ink" },
   DRYING: { label: "In processing", text: "Solar drying in progress; quality test to follow.", tone: "bg-amber-500 text-ink" },
   RECEIVED: { label: "In processing", text: "Received at the hub; drying and testing to follow.", tone: "bg-amber-500 text-ink" },
   REJECTED: { label: "Withdrawn", text: "Withdrawn from sale.", tone: "bg-black/60 text-white" },
@@ -139,7 +139,7 @@ export default async function VerifyLotPage({ params }: Props) {
             <Fact label="Farm size" value={lot.origin.farmSizeBand} />
           </dl>
           <p className="mt-4 text-xs text-ink/70">
-            To protect farmers, CashewTrace shows initials and community only — never names, phone numbers or GPS
+            To protect farmers, CashewTrace shows initials and community only, never names, phone numbers or GPS
             locations. The farmer consented to this information being shown to buyers.
           </p>
         </Panel>

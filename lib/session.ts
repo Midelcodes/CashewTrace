@@ -31,7 +31,7 @@ export async function getSession() {
   return getIronSession<SessionData>(await cookies(), sessionOptions());
 }
 
-/** Decrypt a raw cookie value without touching next/headers — used by proxy.ts. */
+/** Decrypt a raw cookie value without touching next/headers - used by proxy.ts. */
 export async function readSessionCookie(value: string | undefined): Promise<SessionData> {
   if (!value) return {};
   const { password, ttl } = sessionOptions();

@@ -6,7 +6,7 @@ import { toNumber } from "@/lib/money";
 import { getSettings } from "@/lib/settings";
 
 // Aggregate impact figures for the hub dashboard (/hub) and the public page (/impact).
-// Returns counts, sums and chart series only — never names, phones or per-farmer rows.
+// Returns counts, sums and chart series only - never names, phones or per-farmer rows.
 
 /** Programme target: share of registered farmers who are women or youth. */
 export const INCLUSION_TARGET_PCT = 60;

@@ -28,7 +28,7 @@ export default async function PublicImpactPage({ searchParams }: { searchParams:
         <div>
           <h1 className="text-3xl font-bold text-brand">CashewTrace impact</h1>
           <p className="mt-1 max-w-2xl text-ink/70">
-            What the village quality hubs have done for cashew farmers — {periodLabel}, all hubs. Figures are computed
+            What the village quality hubs have done for cashew farmers: {periodLabel}, all hubs. Figures are computed
             from the prototype’s demo data; anything estimated is labelled.
           </p>
         </div>

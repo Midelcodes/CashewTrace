@@ -51,7 +51,7 @@ Requirements: Node.js 20+ and a PostgreSQL database.
    Generate a secret with `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`.
 
    The database must use **UTF-8** encoding (the ₦ sign is stored in audit entries). Docker's
-   `postgres` image and Railway Postgres are UTF-8 by default; a Windows-installed Postgres may not be —
+   `postgres` image and Railway Postgres are UTF-8 by default; a Windows-installed Postgres may not be -
    create it with `CREATE DATABASE cashewtrace ENCODING 'UTF8' TEMPLATE template0;`.
 
 4. **Create the database tables and load demo data:**
@@ -64,7 +64,7 @@ Requirements: Node.js 20+ and a PostgreSQL database.
    The seed is deterministic. It only runs on an empty database; use `npm run db:seed:reset` to wipe
    and reload. It creates 2 hubs in Kogi State,
    1 admin + 4 agents, 60 farmers, 120 lots (seasons 2025–2026) with quality tests, 40 sales and
-   10 buyer enquiries — all fictional.
+   10 buyer enquiries - all fictional.
 
    Demo logins: admin phone `0800 000 9000` with PIN = `ADMIN_PIN`; agents `0800 000 9001`–`9004`
    with PIN `1234`.
@@ -144,7 +144,7 @@ cookies (httpOnly, `secure` in production, SameSite=Lax, 12-hour expiry).
 
 ## Landing page
 
-`/` — hero, the problem, how it works, who benefits, live numbers (4 aggregate KPIs from the
+`/` - hero, the problem, how it works, who benefits, live numbers (4 aggregate KPIs from the
 database, cached 5 minutes, labelled "prototype · demo data"), climate-smart, inclusion and footer.
 Built for mobile speed: no images (inline SVG only), no client components (plain `<a>` links on the
 public pages), and the ₦ sign drawn in the system font so Inter's 84 KiB latin-ext file isn't needed.
@@ -152,11 +152,11 @@ Orange text and white-on-orange buttons use `accent-dark` (#B4521A) so they pass
 
 ## Public verification
 
-- `/v/<lotCode>` — public page a buyer reaches by scanning the bag QR code: verdict, grade, quality
+- `/v/<lotCode>` - public page a buyer reaches by scanning the bag QR code: verdict, grade, quality
   (moisture drop, KOR gauge), origin, chain of custody, status, and a buyer-interest form when the lot
   is listed. Unknown codes return a 404 "Lot not found" page.
-- `/verify` — type a lot code (or paste a link) and get redirected to its page.
-- `/lots` — public catalogue of LISTED lots (passed grading, farmer consented): summary of tonnes
+- `/verify` - type a lot code (or paste a link) and get redirected to its page.
+- `/lots` - public catalogue of LISTED lots (passed grading, farmer consented): summary of tonnes
   available by grade, filters for grade / season / state / minimum KOR, sort by KOR or weight. No
   prices are shown; "Request this lot" jumps to the interest form on the lot's page.
 - Everything public goes through `lib/public-lot.ts`, the privacy boundary: farmer initials, community,
@@ -169,11 +169,11 @@ Orange text and white-on-orange buttons use `accent-dark` (#B4521A) so they pass
 
 ## Impact dashboard
 
-- `/hub` (default after login) — KPI tiles for farmers (women / youth / women-or-youth vs the 60%
+- `/hub` (default after login) - KPI tiles for farmers (women / youth / women-or-youth vs the 60%
   target), volume, quality, money and environment, four charts (tonnes per month, grade split, KOR
   histogram, farmers by gender × age), latest lots and latest buyer enquiries with a "Mark contacted"
   toggle. Agents see their own hub; admins can pick a hub. Season filter defaults to the current year.
-- `/impact` — public, read-only: the same aggregate KPIs and charts across all hubs, no tables or
+- `/impact` - public, read-only: the same aggregate KPIs and charts across all hubs, no tables or
   personal data.
 - Figures come from `lib/impact.ts`. "Post-harvest loss avoided" is an **estimate**: tonnes
   solar-dried × `spoilageAvoidedFactor` (Settings, default 0.05), labelled as such with the formula.
@@ -184,12 +184,12 @@ Orange text and white-on-orange buttons use `accent-dark` (#B4521A) so they pass
 
 Admins (role ADMIN) also get:
 
-- `/hub/settings` — edit every Settings field (percentages entered as %), validated with zod
+- `/hub/settings` - edit every Settings field (percentages entered as %), validated with zod
   (A > B > C thresholds). Shows when and by whom it was last changed; every change is audited
   with a before → after diff. New thresholds apply to new tests; existing grades are kept.
-- `/hub/agents` — add agents, reset PINs, deactivate / reactivate. Deactivated agents can't sign
+- `/hub/agents` - add agents, reset PINs, deactivate / reactivate. Deactivated agents can't sign
   in and lose access on their next request; their records are kept.
-- `/hub/exports` — CSV downloads (farmers, lots with tests, sales) filtered by season and hub.
+- `/hub/exports` - CSV downloads (farmers, lots with tests, sales) filtered by season and hub.
   Pseudonymised by default (farmer codes only); names and phone numbers only when explicitly
   ticked. Formula-injection safe, UTF-8 with BOM for Excel, and every export is audited.
 
@@ -206,7 +206,7 @@ Admins (role ADMIN) also get:
 
 ## Ground rules
 
-- **Privacy:** public pages show farmer initials, community, LGA and state only — never full name,
+- **Privacy:** public pages show farmer initials, community, LGA and state only - never full name,
   phone number or exact location.
 - **Honesty:** the demo-data banner is on every page; computed impact figures are labelled
   "estimated".

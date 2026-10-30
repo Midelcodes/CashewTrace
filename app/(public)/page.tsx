@@ -6,11 +6,11 @@ import { getLandingStats } from "@/lib/landing";
 import { formatNaira, formatNairaCompact, formatTonnes } from "@/lib/money";
 
 export const metadata: Metadata = {
-  title: "CashewTrace — Quality you can trace. Value Nigeria keeps.",
+  title: "CashewTrace | Quality you can trace. Value Nigeria keeps.",
   description:
     "Village quality hubs for Nigerian cashew: solar-dried, moisture- and KOR-tested, QR-traceable raw cashew nuts from smallholder farmers.",
   openGraph: {
-    title: "CashewTrace — Quality you can trace. Value Nigeria keeps.",
+    title: "CashewTrace | Quality you can trace. Value Nigeria keeps.",
     description: "Solar-dried, tested, QR-traceable cashew from Nigerian smallholders.",
     url: "/",
     siteName: "CashewTrace",
@@ -40,7 +40,7 @@ export default async function LandingPage() {
                 <span className="text-accent">Value Nigeria keeps.</span>
               </h1>
               <p className="mt-4 max-w-xl text-lg text-cream/85">
-                Solar-dried, moisture- and KOR-tested, QR-traceable raw cashew nuts from Nigerian smallholder farmers —
+                Solar-dried, moisture- and KOR-tested, QR-traceable raw cashew nuts from Nigerian smallholder farmers,
                 verified at the village, before the first sale.
               </p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
@@ -74,7 +74,7 @@ export default async function LandingPage() {
               Nuts sold damp or mixed across qualities are rejected or heavily discounted by processors and exporters.
             </Card>
             <Card icon={<ScaleIcon />} title="Farmers paid by guesswork">
-              Without a moisture meter or a KOR test, farmers can’t prove their quality — so they take the price they’re
+              Without a moisture meter or a KOR test, farmers can’t prove their quality, so they take the price they’re
               given.
             </Card>
             <Card icon={<BorderIcon />} title="Origin leaks away">
@@ -88,8 +88,8 @@ export default async function LandingPage() {
         <Section eyebrow="How it works" title="Five steps at a village hub" tone="white">
           <ol className="grid gap-4 md:grid-cols-5">
             {[
-              { icon: <UserIcon />, title: "Register farmer", text: "Hub agent records the farmer with consent — on a basic Android phone." },
-              { icon: <SunIcon />, title: "Solar dry", text: "Nuts dry on raised solar platforms — no fuel, no ground contact." },
+              { icon: <UserIcon />, title: "Register farmer", text: "Hub agent records the farmer with consent on a basic Android phone." },
+              { icon: <SunIcon />, title: "Solar dry", text: "Nuts dry on raised solar platforms: no fuel, no ground contact." },
               { icon: <MeterIcon />, title: "Test moisture & KOR", text: "Each lot is measured and graded A, B or C against set thresholds." },
               { icon: <QrIcon />, title: "QR tag", text: "Every bag gets a label with a QR code linked to its record." },
               { icon: <HandshakeIcon />, title: "Sell to verified buyers", text: "Buyers scan, verify and request the lot. Farmers keep ownership." },
@@ -144,7 +144,7 @@ export default async function LandingPage() {
             <Stat value={String(s.farmers)} label="Farmers registered" />
             <Stat value={formatTonnes(s.kgDried)} label="Solar-dried & tested" />
             <Stat value={<Money value={formatNairaCompact(s.paidNgn)} />} label="Paid to farmers" />
-            <Stat value={s.avgKor === null ? "—" : s.avgKor.toFixed(1)} label="Average KOR (lbs / 80 kg)" />
+            <Stat value={s.avgKor === null ? "n/a" : s.avgKor.toFixed(1)} label="Average KOR (lbs / 80 kg)" />
           </div>
           <a href="/impact" className="mt-5 inline-block font-semibold text-brand underline underline-offset-2">
             See the full impact dashboard →
@@ -158,7 +158,7 @@ export default async function LandingPage() {
               <h3 className="text-lg font-bold">Climate-smart</h3>
               <ul className="mt-4 flex flex-col gap-4">
                 <Point icon={<SunIcon />} title="Solar drying, no fuel">
-                  Every lot is dried on solar platforms — 0 litres of diesel.
+                  Every lot is dried on solar platforms, using 0 litres of diesel.
                 </Point>
                 <Point icon={<LeafIcon />} title="Less spoilage and waste">
                   Drying to safe moisture before storage cuts mould and rejected lots. Estimated{" "}
@@ -172,17 +172,17 @@ export default async function LandingPage() {
             <div className="flex flex-col rounded-2xl bg-brand p-6 text-cream">
               <h3 className="text-lg font-bold">Inclusion</h3>
               <p className="mt-4 text-5xl font-bold">{INCLUSION_TARGET_PCT}%</p>
-              <p className="mt-1 text-lg">of hub agents women or youth — our hiring commitment.</p>
+              <p className="mt-1 text-lg">of hub agents women or youth: our hiring commitment.</p>
               <div className="mt-6 grid grid-cols-2 gap-3 text-sm">
                 <div className="rounded-xl bg-white/10 p-3">
-                  <p className="text-2xl font-bold">{agentsPct === null ? "—" : `${agentsPct}%`}</p>
+                  <p className="text-2xl font-bold">{agentsPct === null ? "n/a" : `${agentsPct}%`}</p>
                   <p className="text-cream/80">
                     of demo hub agents today ({s.agentsWomenOrYouth} of {s.agents})
                   </p>
                 </div>
                 <div className="rounded-xl bg-white/10 p-3">
                   <p className="text-2xl font-bold">
-                    {s.farmersWomenOrYouthPct === null ? "—" : `${Math.round(s.farmersWomenOrYouthPct)}%`}
+                    {s.farmersWomenOrYouthPct === null ? "n/a" : `${Math.round(s.farmersWomenOrYouthPct)}%`}
                   </p>
                   <p className="text-cream/80">of registered farmers are women or youth</p>
                 </div>

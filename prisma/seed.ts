@@ -1,4 +1,4 @@
-// Demo seed — ALL PEOPLE, COMPANIES, PHONE NUMBERS AND LOTS ARE FICTIONAL.
+// Demo seed. ALL PEOPLE, COMPANIES, PHONE NUMBERS AND LOTS ARE FICTIONAL.
 // Phones are stored as digits only (see lib/phone.ts).
 // Deterministic (seeded PRNG), so re-running produces the same dataset. Wipes existing data first.
 
@@ -145,7 +145,7 @@ async function main() {
   const existingLots = await db.lot.count();
   if (existingLots > 0 && !process.argv.includes("--reset")) {
     console.log(
-      `Database already has data (${existingLots} lots) — nothing changed.\n` +
+      `Database already has data (${existingLots} lots). Nothing changed.\n` +
         "To WIPE everything and reload the demo data, run: npm run db:seed:reset",
     );
     return;
@@ -332,7 +332,7 @@ async function main() {
   const unsold = byTestedAt.filter((t) => !status.has(t.lotIdx)).reverse(); // newest first
   unsold.forEach((t, i) => status.set(t.lotIdx, i < 6 ? "TESTED" : i < 12 ? "RESERVED" : "LISTED"));
 
-  const REJECT_REASON = "KOR below minimum — returned to farmer";
+  const REJECT_REASON = "KOR below minimum, returned to farmer";
   const testByIdx = new Map(tests.map((t) => [t.lotIdx, t]));
   const lotData = lotSpecs.map((l, i) => {
     sequence[l.season] = (sequence[l.season] ?? 0) + 1;
@@ -449,7 +449,7 @@ async function main() {
     buyerInterests: await db.buyerInterest.count(),
     auditLogs: await db.auditLog.count(),
   });
-  console.log(`Demo logins — admin: phone 0800 000 9000, PIN from ADMIN_PIN; agents: 0800 000 9001–9004, PIN ${DEMO_AGENT_PIN}`);
+  console.log(`Demo logins. Admin: phone 0800 000 9000, PIN from ADMIN_PIN; agents: 0800 000 9001–9004, PIN ${DEMO_AGENT_PIN}`);
 }
 
 main()

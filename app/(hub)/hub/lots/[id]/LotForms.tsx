@@ -92,7 +92,7 @@ export function QualityTestForm({
         {preview ? (
           <>
             <span className="font-bold">Expected: {preview === "FAIL" ? "Fail" : `Grade ${preview}`}</span>
-            {tooWet && " — too wet, keep drying"}
+            {tooWet && ", too wet, keep drying"}
           </>
         ) : (
           "Enter moisture and KOR to preview the grade"
@@ -143,7 +143,7 @@ export function SaleForm({
       <Field label="Buyer name" error={err.buyerName}>
         <input name="buyerName" defaultValue={v.buyerName} aria-invalid={!!err.buyerName} className={inputClass} />
       </Field>
-      <Field label="Price per tonne (₦)" error={err.pricePerTonneNgn} hint="Prefilled from Settings — use the agreed price">
+      <Field label="Price per tonne (₦)" error={err.pricePerTonneNgn} hint="Prefilled from Settings. Use the agreed price">
         <input name="pricePerTonneNgn" type="number" inputMode="numeric" step="1000" value={price} onChange={(e) => setPrice(e.target.value)} aria-invalid={!!err.pricePerTonneNgn} className={`${inputClass} text-lg font-semibold`} />
       </Field>
       {preview && (
@@ -164,7 +164,7 @@ export function SaleForm({
 }
 
 const REJECT_REASONS = [
-  "KOR below minimum — returned to farmer",
+  "KOR below minimum, returned to farmer",
   "Mould or insect damage",
   "Foreign matter / adulteration",
   "Farmer withdrew the lot",

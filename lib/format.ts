@@ -27,7 +27,7 @@ export function formatDateTime(date: Date): string {
   return dateTimeFormat.format(date);
 }
 
-/** Current year and month in Lagos — defaults for season and harvest month. */
+/** Current year and month in Lagos - defaults for season and harvest month. */
 export function lagosToday(): { year: number; month: number } {
   const [y, m] = new Intl.DateTimeFormat("en-CA", { timeZone: "Africa/Lagos", year: "numeric", month: "2-digit" })
     .format(new Date())
@@ -35,7 +35,7 @@ export function lagosToday(): { year: number; month: number } {
   return { year: Number(y), month: Number(m) };
 }
 
-/** Whole days elapsed since `date` (at least 1) — e.g. days on the drying platform. */
+/** Whole days elapsed since `date` (at least 1) - e.g. days on the drying platform. */
 export function daysSince(date: Date): number {
   return Math.max(1, Math.round((Date.now() - date.getTime()) / (24 * 60 * 60 * 1000)));
 }

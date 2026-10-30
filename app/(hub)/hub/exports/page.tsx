@@ -55,7 +55,7 @@ export default async function ExportsPage() {
           <label className="mt-3 flex items-start gap-2 text-sm text-ink/80">
               <input type="checkbox" name="personal" value="1" className="mt-0.5 size-5 accent-brand" />
               <span>
-                Include farmer names{e.kind === "lots" ? "" : " and phone numbers"} — internal use only. Leave unticked for
+                Include farmer names{e.kind === "lots" ? "" : " and phone numbers"}, for internal use only. Leave unticked for
                 files you share: farmers are identified by code.
               </span>
           </label>

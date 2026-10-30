@@ -48,13 +48,13 @@ export function formatKg(kg: number): string {
   return `${kgFormat.format(kg)} kg`;
 }
 
-/** 12500 → "12.5 t" — for summaries; pass 2 digits for small lots ("0.16 t"). */
+/** 12500 → "12.5 t" - for summaries; pass 2 digits for small lots ("0.16 t"). */
 export function formatTonnes(kg: number, digits = 1): string {
   const f = new Intl.NumberFormat("en-NG", { minimumFractionDigits: digits, maximumFractionDigits: digits });
   return `${f.format(kg / 1000)} t`;
 }
 
-/** 3214567 → "₦3.2m", 912000 → "₦912k" — for stat tiles; show the full figure alongside. */
+/** 3214567 → "₦3.2m", 912000 → "₦912k" - for stat tiles; show the full figure alongside. */
 export function formatNairaCompact(amount: number): string {
   if (Math.abs(amount) >= 1_000_000) return `₦${(amount / 1_000_000).toFixed(1)}m`;
   if (Math.abs(amount) >= 10_000) return `₦${Math.round(amount / 1000)}k`;

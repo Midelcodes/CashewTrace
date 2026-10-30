@@ -99,7 +99,7 @@ export async function qualityTestAction(_prev: FormState, formData: FormData): P
     select: { id: true, status: true, moistureBefore: true },
   });
   if (!lot) return { error: "Lot not found.", values };
-  if (lot.status !== "DRYING") return { error: "This lot has already moved on — refresh the page.", values };
+  if (lot.status !== "DRYING") return { error: "This lot has already moved on. Refresh the page.", values };
 
   const settings = await getSettings();
   const { lotId, moistureAfter, korLbs, ...rest } = data;
@@ -108,11 +108,11 @@ export async function qualityTestAction(_prev: FormState, formData: FormData): P
   // Too wet: no test is saved, the lot stays in DRYING, and the check is logged on the timeline.
   if (moistureAfter > settings.moistureMaxPct) {
     await db.$transaction((tx) =>
-      logLotEvent(tx, lotId, agent.id, "MOISTURE_CHECK", `Moisture ${moistureAfter}% — above ${settings.moistureMaxPct}%, continue drying`),
+      logLotEvent(tx, lotId, agent.id, "MOISTURE_CHECK", `Moisture ${moistureAfter}%, above ${settings.moistureMaxPct}%: continue drying`),
     );
     revalidatePath(`/hub/lots/${lotId}`);
     return {
-      warning: `Moisture too high — continue drying. ${moistureAfter}% is above the ${settings.moistureMaxPct}% maximum. Test again after more sun.`,
+      warning: `Moisture too high: continue drying. ${moistureAfter}% is above the ${settings.moistureMaxPct}% maximum. Test again after more sun.`,
       values,
     };
   }

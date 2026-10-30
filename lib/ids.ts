@@ -35,7 +35,7 @@ export function formatLotCode(state: string, season: number, sequence: number): 
   return `CT-${stateCode(state)}-${season}-${pad6(sequence)}`;
 }
 
-/** "Amina Bello" → "A.B." — the only form of a farmer's name allowed on public pages. */
+/** "Amina Bello" → "A.B." - the only form of a farmer's name allowed on public pages. */
 export function initials(fullName: string): string {
   return fullName
     .trim()

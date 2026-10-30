@@ -33,7 +33,7 @@ export class LotStateError extends Error {}
 
 /**
  * Move a lot to a new status, but only if it is still in one of `from` (and inside the agent's
- * scope) — guards against double taps and stale screens. Writes the audit entry in the same transaction.
+ * scope) - guards against double taps and stale screens. Writes the audit entry in the same transaction.
  */
 export async function transitionLot(
   tx: Prisma.TransactionClient,
@@ -50,7 +50,7 @@ export async function transitionLot(
     where: { ...opts.where, status: { in: opts.from } },
     data: opts.data,
   });
-  if (res.count !== 1) throw new LotStateError("This lot has already moved on — refresh the page.");
+  if (res.count !== 1) throw new LotStateError("This lot has already moved on. Refresh the page.");
   await logLotEvent(tx, opts.where.id, opts.agentId, opts.event, opts.detail);
 }
 

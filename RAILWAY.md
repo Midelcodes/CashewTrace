@@ -22,7 +22,7 @@ the private network with the service's variables, and a failed migration stops t
 
 ## 1. Create the project and database
 
-1. Go to <https://railway.com> → **New Project** → **Empty project** (or deploy from repo — see step 2).
+1. Go to <https://railway.com> → **New Project** → **Empty project** (or deploy from repo - see step 2).
 2. In the project canvas click **+ Create** (or **New**) → **Database** → **PostgreSQL**.
    Railway creates a service called **Postgres** with a `DATABASE_URL` variable.
 
@@ -30,7 +30,7 @@ the private network with the service's variables, and a failed migration stops t
 
 1. Push this repo to GitHub first (commands at the bottom).
 2. In the same project click **+ Create** → **GitHub Repo** → pick `cashewtrace`.
-   Railway detects Node.js and starts a first build — it is expected to fail its health check
+   Railway detects Node.js and starts a first build - it is expected to fail its health check
    until the variables below are set.
 
 ## 3. Set variables on the app service
@@ -39,7 +39,7 @@ Open the **cashewtrace** service → **Variables** → **Raw Editor**, paste, th
 
 ```env
 DATABASE_URL=${{Postgres.DATABASE_URL}}
-SESSION_SECRET=<64 random hex characters — see below>
+SESSION_SECRET=<64 random hex characters - see below>
 ADMIN_PIN=<4–6 digit admin PIN>
 PUBLIC_BASE_URL=https://placeholder.up.railway.app
 NODE_ENV=production
@@ -73,7 +73,7 @@ Click **Deploy** (Railway shows staged changes until you apply them).
 4. Apply/redeploy. `PUBLIC_BASE_URL` is baked into QR codes, bag labels, link previews and
    `robots.txt`, so this redeploy is required. **Only print bag labels after this step.**
 
-## 6. Seed the demo data — once
+## 6. Seed the demo data - once
 
 Install the CLI and open a shell **inside** the running container (`railway run` would run on your
 own computer, which can't reach the private database):

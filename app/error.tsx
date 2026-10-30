@@ -5,7 +5,7 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
   return (
     <main className="mx-auto w-full max-w-xl flex-1 px-4 py-14">
       <p className="text-sm font-semibold uppercase tracking-wider text-accent-dark">Something went wrong</p>
-      <h1 className="mt-2 text-3xl font-bold text-brand">Sorry — this page didn’t load</h1>
+      <h1 className="mt-2 text-3xl font-bold text-brand">Sorry, this page didn’t load</h1>
       <p className="mt-2 text-ink/70">
         It’s not you. Please try again in a moment. If it keeps happening, tell the CashewTrace team
         {error.digest ? (

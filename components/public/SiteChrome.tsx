@@ -48,7 +48,7 @@ export function SiteFooter({ wide = false }: { wide?: boolean }) {
   );
 }
 
-/** Plain GET form — works without JavaScript; /verify normalises the code and redirects. */
+/** Plain GET form - works without JavaScript; /verify normalises the code and redirects. */
 export function VerifyBox({ defaultValue, autoFocus }: { defaultValue?: string; autoFocus?: boolean }) {
   return (
     <form action="/verify" className="flex flex-col gap-3 sm:flex-row" role="search">

@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "CashewTrace",
     short_name: "CashewTrace",
-    description: "Village quality hubs for Nigerian cashew — prototype, demo data.",
+    description: "Village quality hubs for Nigerian cashew. Prototype, demo data.",
     start_url: "/hub",
     display: "standalone",
     background_color: "#FAF7F2",

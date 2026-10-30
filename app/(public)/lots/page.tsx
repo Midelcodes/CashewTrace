@@ -45,7 +45,7 @@ export default async function CataloguePage({ searchParams }: { searchParams: Pr
           links to its verification record.
         </p>
 
-        {/* Summary strip — everything currently available */}
+        {/* Summary strip - everything currently available */}
         <section aria-label="Availability summary" className="mt-5 grid grid-cols-3 gap-3 sm:grid-cols-4">
           <div className="col-span-3 rounded-2xl bg-brand p-4 text-cream sm:col-span-1">
             <p className="text-sm text-cream/80">Available now</p>
@@ -71,7 +71,7 @@ export default async function CataloguePage({ searchParams }: { searchParams: Pr
           ))}
         </section>
 
-        {/* Filters — plain GET form, works without JavaScript */}
+        {/* Filters - plain GET form, works without JavaScript */}
         <form action="/lots" className="mt-5 grid grid-cols-2 gap-3 rounded-2xl bg-white p-4 ring-1 ring-black/5 md:grid-cols-6 md:items-end">
           <label className="flex flex-col gap-1">
             <span className="text-xs font-semibold text-ink/70">Grade</span>

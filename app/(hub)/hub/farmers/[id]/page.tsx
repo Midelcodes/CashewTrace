@@ -84,8 +84,8 @@ export default async function FarmerProfilePage({
             <Detail label="Gender" value={farmer.gender === "FEMALE" ? "Female" : "Male"} />
             <Detail label="Age group" value={farmer.ageGroup === "YOUTH_18_35" ? "Youth (18–35)" : "36 and over"} />
             <Detail label="Farm size" value={`${toNumber(farmer.farmSizeHa)} ha`} />
-            <Detail label="Cashew trees" value={farmer.numberOfTrees?.toLocaleString("en-NG") ?? "—"} />
-            <Detail label="Cooperative" value={farmer.cooperative ?? "—"} />
+            <Detail label="Cashew trees" value={farmer.numberOfTrees?.toLocaleString("en-NG") ?? "n/a"} />
+            <Detail label="Cooperative" value={farmer.cooperative ?? "n/a"} />
             <Detail label="Hub" value={`${farmer.hub.name} (${farmer.hub.code})`} />
             <Detail label="Registered" value={formatDate(farmer.createdAt)} />
             <Detail label="Buyer data consent" value={farmer.consentGiven ? "Given ✓" : "Not given"} />
@@ -96,7 +96,7 @@ export default async function FarmerProfilePage({
         <section className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
           <Stat label="Lots delivered" value={String(lots.length)} />
           <Stat label="Total delivered" value={totalKg >= 1000 ? formatTonnes(totalKg) : formatKg(totalKg)} sub={totalKg >= 1000 ? formatKg(totalKg) : undefined} />
-          <Stat label="Average KOR" value={avgKor !== null ? `${avgKor.toFixed(1)} lbs` : "—"} sub={tested.length ? `${tested.length} tested lots` : "No tests yet"} />
+          <Stat label="Average KOR" value={avgKor !== null ? `${avgKor.toFixed(1)} lbs` : "n/a"} sub={tested.length ? `${tested.length} tested lots` : "No tests yet"} />
           <Stat label="Total payout" value={formatNaira(totalPayout)} sub={`${sold.length} sold lots`} />
         </section>
 
@@ -171,7 +171,7 @@ export default async function FarmerProfilePage({
           <Detail label="Farm size" value={`${toNumber(farmer.farmSizeHa)} ha${farmer.numberOfTrees ? ` · ${farmer.numberOfTrees.toLocaleString("en-NG")} trees` : ""}`} />
           <Detail label="Registered since" value={formatDate(farmer.createdAt)} />
           {farmer.cooperative && <Detail label="Cooperative" value={farmer.cooperative} />}
-          <Detail label="Seasons active" value={seasons.length ? seasons.join(", ") : "—"} />
+          <Detail label="Seasons active" value={seasons.length ? seasons.join(", ") : "n/a"} />
         </dl>
 
         <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4 print:grid-cols-4">
@@ -182,7 +182,7 @@ export default async function FarmerProfilePage({
         </div>
 
         <p className="mt-3 text-xs text-ink/70">
-          Quality: average KOR {avgKor !== null ? `${avgKor.toFixed(1)} lbs/80 kg bag` : "—"}
+          Quality: average KOR {avgKor !== null ? `${avgKor.toFixed(1)} lbs/80 kg bag` : "n/a"}
           {Object.keys(grades).length > 0 &&
             ` · grades ${(["A", "B", "C", "FAIL"] as Grade[])
               .filter((g) => grades[g])
@@ -215,7 +215,7 @@ export default async function FarmerProfilePage({
                     <td className="py-2 pr-2 whitespace-nowrap">{formatDate(l.sale!.soldAt)}</td>
                     <td className="py-2 pr-2 font-mono text-xs">{l.lotCode}</td>
                     <td className="py-2 pr-2 text-right whitespace-nowrap">{formatKg(l.weightKg)}</td>
-                    <td className="py-2 pr-2">{l.qualityTest?.grade ?? "—"}</td>
+                    <td className="py-2 pr-2">{l.qualityTest?.grade ?? "n/a"}</td>
                     <td className="py-2 pr-2 text-right">{formatNaira(toNumber(l.sale!.pricePerTonneNgn))}</td>
                     <td className="py-2 text-right font-semibold">{formatNaira(toNumber(l.sale!.farmerPayoutNgn))}</td>
                   </tr>
@@ -243,7 +243,7 @@ export default async function FarmerProfilePage({
             less drying and testing fees. Lot codes can be verified by scanning the lot QR code.
           </p>
           <p className="mt-1 font-semibold text-ink/80">
-            Prototype · demo data — fictional record, not a financial document.
+            Prototype · demo data. Fictional record, not a financial document.
           </p>
         </footer>
       </article>

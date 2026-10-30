@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 import { getImpact } from "@/lib/impact";
 import { getSettings } from "@/lib/settings";
 
-/** Cache tag — saving Settings invalidates it so the landing page shows new fees/commission at once. */
+/** Cache tag - saving Settings invalidates it so the landing page shows new fees/commission at once. */
 export const LANDING_STATS_TAG = "landing-stats";
 
 /** Aggregate figures for the landing page, cached for 5 minutes so the page stays fast. */

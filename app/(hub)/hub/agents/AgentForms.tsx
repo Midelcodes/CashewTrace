@@ -58,7 +58,7 @@ export function NewAgentForm({ hubs }: { hubs: { id: string; name: string }[] })
             ))}
           </select>
         </Field>
-        <Field label="Starting PIN" error={err.pin} hint="4–6 digits — tell the agent in person">
+        <Field label="Starting PIN" error={err.pin} hint="4–6 digits. Tell the agent in person">
           <input name="pin" type="password" inputMode="numeric" autoComplete="new-password" maxLength={6} aria-invalid={!!err.pin} className={`${inputClass} tracking-[0.3em]`} />
         </Field>
       </div>
